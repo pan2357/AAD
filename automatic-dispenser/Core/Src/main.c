@@ -78,7 +78,8 @@ int dispensing = 0;
 int readWaterLevel(void){
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1);
-	return HAL_ADC_GetValue(&hadc1);
+	if(HAL_ADC_GetValue(&hadc1)>4000)return 1;
+	else return 0;
 }
 
 
