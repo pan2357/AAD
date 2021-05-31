@@ -99,11 +99,10 @@ void loop() {
       } 
                     //บวกเลขที่ละ 1
       //Serial.println("X1 right now is %d",x1);
-      x2 = random(100);   //สุ่มตัวเลข 0-100
 
       Serial.println("Publish...");
 
-      sprintf(data, "%d,%d", x1, x2);   //แปรง int รวมกันใน char ชื่อ data
+      sprintf(data, "%d", x1);   //แปรง int รวมกันใน char ชื่อ data
       Serial.println(data);
       microgear.publish("/x", data);      //ส่งค่าขึ้น NETPIE
 
