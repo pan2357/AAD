@@ -78,8 +78,8 @@ int dispensing = 0;
 int readWaterLevel(void){
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1);
-	if(HAL_ADC_GetValue(&hadc1)>4000)return 1;
-	else return 0;
+	if(HAL_ADC_GetValue(&hadc1)>4000)return 2;
+	else return 1;
 }
 
 
@@ -138,7 +138,6 @@ int main(void)
 			  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_6,0);
 			  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
 			  HAL_UART_Transmit(&huart1, &buffer, sizeof(buffer), 1000);
-//			  HAL_UART_Transmit(&huart1, &buffer, sizeof(buffer), 1000);
 		  }
 	  }
 	  else{

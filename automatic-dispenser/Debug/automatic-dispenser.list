@@ -1017,16 +1017,16 @@ int readWaterLevel(void){
  8000cb6:	2101      	movs	r1, #1
  8000cb8:	4807      	ldr	r0, [pc, #28]	; (8000cd8 <readWaterLevel+0x2c>)
  8000cba:	f000 fe75 	bl	80019a8 <HAL_ADC_PollForConversion>
-	if(HAL_ADC_GetValue(&hadc1)>4000)return 1;
+	if(HAL_ADC_GetValue(&hadc1)>4000)return 2;
  8000cbe:	4806      	ldr	r0, [pc, #24]	; (8000cd8 <readWaterLevel+0x2c>)
  8000cc0:	f000 fefd 	bl	8001abe <HAL_ADC_GetValue>
  8000cc4:	4603      	mov	r3, r0
  8000cc6:	f5b3 6f7a 	cmp.w	r3, #4000	; 0xfa0
  8000cca:	d901      	bls.n	8000cd0 <readWaterLevel+0x24>
- 8000ccc:	2301      	movs	r3, #1
+ 8000ccc:	2302      	movs	r3, #2
  8000cce:	e000      	b.n	8000cd2 <readWaterLevel+0x26>
-	else return 0;
- 8000cd0:	2300      	movs	r3, #0
+	else return 1;
+ 8000cd0:	2301      	movs	r3, #1
 }
  8000cd2:	4618      	mov	r0, r3
  8000cd4:	bd80      	pop	{r7, pc}
@@ -1134,7 +1134,6 @@ int main(void)
  8000d60:	480c      	ldr	r0, [pc, #48]	; (8000d94 <main+0xb8>)
  8000d62:	f002 ffc0 	bl	8003ce6 <HAL_UART_Transmit>
  8000d66:	e7ce      	b.n	8000d06 <main+0x2a>
-//			  HAL_UART_Transmit(&huart1, &buffer, sizeof(buffer), 1000);
 		  }
 	  }
 	  else{
