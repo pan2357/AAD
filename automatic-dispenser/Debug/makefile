@@ -1,5 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 -include ../makefile.init
@@ -28,6 +29,12 @@ endif
 
 -include ../makefile.defs
 
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
 BUILD_ARTIFACT_NAME := automatic-dispenser
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
@@ -54,22 +61,22 @@ all: main-build
 main-build: automatic-dispenser.elf secondary-outputs
 
 # Tool invocations
-automatic-dispenser.elf: $(OBJS) $(USER_OBJS) C:\Users\Thanapoom\STM32CubeIDE\embedded-lab\automatic-dispenser\STM32F411RETX_FLASH.ld
-	arm-none-eabi-gcc -o "automatic-dispenser.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Thanapoom\STM32CubeIDE\embedded-lab\automatic-dispenser\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="automatic-dispenser.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+automatic-dispenser.elf: $(OBJS) $(USER_OBJS) D:\STM32CubeIDE\workspace_1.5.1\AAD\automatic-dispenser\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "automatic-dispenser.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\STM32CubeIDE\workspace_1.5.1\AAD\automatic-dispenser\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="automatic-dispenser.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-default.size.stdout: $(EXECUTABLES)
+default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-size  $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-automatic-dispenser.list: $(EXECUTABLES)
+automatic-dispenser.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "automatic-dispenser.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-automatic-dispenser.bin: $(EXECUTABLES)
+automatic-dispenser.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "automatic-dispenser.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
