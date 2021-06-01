@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <MicroGear.h>
 
-const char* ssid     = "embedded";  //ชื่อ wifi
+const char* ssid     = "embedded";  //ชื่อ wfi
 const char* password = "embedded";  //รหัสผ่าน wifi
 
 #define APPID   "Esp8266App"                    //ใส่ appid จากเว็บ
@@ -13,9 +13,9 @@ WiFiClient client;
 MicroGear microgear(client);
 
 unsigned long previousMillis = 0;
-const long interval = 1000;
+const long interval = 300;
 char data[32];
-int x1, x2;
+int x1 = 0, x2,receiv,count = 0;
 int a;
 
 /* If a new message arrives, do this */
@@ -75,8 +75,6 @@ void setup() {
 }
 
 void loop() {
-
-  
   
   if (microgear.connected()) {
     digitalWrite(2, LOW); //ไฟบนบอร์ดติดถ้าเชื่อมต่อ NETPIE
@@ -89,20 +87,23 @@ void loop() {
       previousMillis = currentMillis;
 
       if(Serial.available()>0){
-        x1 = Serial.read();
-        if(x1 != NULL){
+        receiv = Serial.read();
+        if(receiv != NULL){
           digitalWrite(LED_BUILTIN,HIGH);
-          Serial.println(x1);
+          Serial.println(receiv);
         }
-      }else{
-        x1 = 0;
-      } 
+      }
+      if(receiv > 0){
+        count += 1;
+        x1 = receiv;
+      }
                     //บวกเลขที่ละ 1
       //Serial.println("X1 right now is %d",x1);
+      //x2 = random(100);   //สุ่มตัวเลข 0-100
 
       Serial.println("Publish...");
 
-      sprintf(data, "%d", x1);   //แปรง int รวมกันใน char ชื่อ data
+      sprintf(data, "%d,%d", x1,count);   //แปรง int รวมกันใน char ชื่อ data
       Serial.println(data);
       microgear.publish("/x", data);      //ส่งค่าขึ้น NETPIE
 
