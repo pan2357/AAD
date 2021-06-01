@@ -1,0 +1,43 @@
+12:47:40 **** Incremental Build of configuration Debug for project automatic-dispenser ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:4: warning: implicit declaration of function 'HCSR04_Read' [-Wimplicit-function-declaration]
+  127 |    HCSR04_Read();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:139:33: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  139 |      HAL_UART_Transmit(&huart1, &buffer, sizeof(buffer), 1000);
+      |                                 ^~~~~~~
+      |                                 |
+      |                                 int *
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:406,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:721:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int *'
+  721 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:418:6: warning: conflicting types for 'HCSR04_Read'
+  418 | void HCSR04_Read (void)
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:127:4: note: previous implicit declaration of 'HCSR04_Read' was here
+  127 |    HCSR04_Read();
+      |    ^~~~~~~~~~~
+arm-none-eabi-gcc -o "automatic-dispenser.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Thanapoom\git\AAD\automatic-dispenser\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="automatic-dispenser.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: automatic-dispenser.elf
+ 
+arm-none-eabi-objdump -h -S  automatic-dispenser.elf  > "automatic-dispenser.list"
+arm-none-eabi-objcopy  -O binary  automatic-dispenser.elf  "automatic-dispenser.bin"
+arm-none-eabi-size   automatic-dispenser.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17080	     20	   1868	  18968	   4a18	automatic-dispenser.elf
+Finished building: default.size.stdout
+ 
+Finished building: automatic-dispenser.bin
+Finished building: automatic-dispenser.list
+ 
+ 
+
+12:47:41 Build Finished. 0 errors, 3 warnings. (took 1s.383ms)
+
