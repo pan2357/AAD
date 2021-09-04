@@ -64,6 +64,7 @@ static void MX_ADC1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+#define Sound_Velocity 0.035065	// sound velocity in cm/uS
 uint32_t IC_Val1 = 0;
 uint32_t IC_Val2 = 0;
 uint32_t Difference = 0;
@@ -422,7 +423,7 @@ void HCSR04_Read (void)
 	HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_RESET);  // pull the TRIG pin low
 
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
-	HAL_Delay(300);
+	HAL_Delay(400);
 	/*char *buffer[100];
 		  sprintf(buffer,"INIT\n\r");
 		  HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);*/
@@ -457,7 +458,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 				Difference = (0xffff - IC_Val1) + IC_Val2;
 			}
 
-			Distance = Difference * .034/2;
+			Distance = Difference * Sound_Velocity/2;
 			Is_First_Captured = 0; // set it back to false
 
 			// set polarity to rising edge
